@@ -15,6 +15,7 @@ const pokemonList = [
 
 function PokemonCard() { 
   const pokemon = pokemonList[0];
+  console.log(pokemon);
   
   return (
     <figure>
