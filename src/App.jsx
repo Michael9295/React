@@ -1,6 +1,6 @@
-import { useState } from "react";
-import PokemonCard from './composant/PokemonCard'
-import './App.css'
+import { useState, useEffect } from "react";
+import "./App.css";
+import NavBar from "./composant/NavBar";
 
 const pokemonList = [
   {
@@ -28,38 +28,48 @@ const pokemonList = [
   },
 ];
 
-
-
-
-
-
-const App = () =>{
+const App = () => {
   const [pokemonIndex, setPokemonIndex] = useState(0);
 
   const handleClickSuiv = () =>
     setPokemonIndex(
       pokemonIndex < pokemonList.length - 1 ? pokemonIndex + 1 : pokemonIndex
     );
+
   const handleClickPrec = () =>
     setPokemonIndex(pokemonIndex > 0 ? pokemonIndex - 1 : pokemonIndex);
 
   const Pokemon = pokemonList[pokemonIndex];
 
+  useEffect(() => {
+    alert("hello pokemon trainer :)");
+  }, []);
+
+  useEffect(() => {
+    if (Pokemon && Pokemon.name === "pikachu") {
+      alert("pika pikachu !!!");
+    }
+  }, [Pokemon]);
+
   return (
     <div>
-      <img src={Pokemon.imgSrc} alt={Pokemon.name} />
+      {Pokemon && <img src={Pokemon.imgSrc} alt={Pokemon.name} />}
       <div>
         {pokemonIndex > 0 ? (
           <button onClick={handleClickPrec}>Précédent</button>
-        ) : undefined}
+        ) : null}
         {pokemonIndex < pokemonList.length - 1 ? (
           <button onClick={handleClickSuiv}>Suivant</button>
-        ) : undefined}
+        ) : null}
       </div>
+      <NavBar
+        handleClickPrec={handleClickPrec}
+        handleClickSuiv={handleClickSuiv}
+        pokemonIndex={pokemonIndex}
+        pokemonListLength={pokemonList.length}
+      />
     </div>
   );
-}
+};
 
-export default App
-
-
+export default App;
