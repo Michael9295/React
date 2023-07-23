@@ -41,16 +41,14 @@ const App = () => {
   const Pokemon = pokemonList[pokemonIndex];
 
   useEffect(() => {
-    // Cette alerte sera déclenchée au "démarrage" de l'application (premier rendu)
     alert("hello pokemon trainer :)");
   }, []);
 
   useEffect(() => {
-    // Cette alerte sera déclenchée lorsque le pokémon choisi devient "pikachu"
     if (Pokemon.name === "pikachu") {
       alert("pika pikachu !!!");
     }
-  }, [Pokemon.name]); // On utilise le nom du pokémon comme dépendance du useEffect
+  }, [Pokemon.name]);
 
   return (
     <div>
