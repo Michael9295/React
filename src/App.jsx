@@ -1,6 +1,5 @@
-import { useState } from "react";
-import PokemonCard from './composant/PokemonCard'
-import './App.css'
+import { useState, useEffect } from "react";
+import "./App.css";
 
 const pokemonList = [
   {
@@ -28,22 +27,30 @@ const pokemonList = [
   },
 ];
 
-
-
-
-
-
-const App = () =>{
+const App = () => {
   const [pokemonIndex, setPokemonIndex] = useState(0);
 
   const handleClickSuiv = () =>
     setPokemonIndex(
       pokemonIndex < pokemonList.length - 1 ? pokemonIndex + 1 : pokemonIndex
     );
+
   const handleClickPrec = () =>
     setPokemonIndex(pokemonIndex > 0 ? pokemonIndex - 1 : pokemonIndex);
 
   const Pokemon = pokemonList[pokemonIndex];
+
+  useEffect(() => {
+    // Cette alerte sera déclenchée au "démarrage" de l'application (premier rendu)
+    alert("hello pokemon trainer :)");
+  }, []);
+
+  useEffect(() => {
+    // Cette alerte sera déclenchée lorsque le pokémon choisi devient "pikachu"
+    if (Pokemon.name === "pikachu") {
+      alert("pika pikachu !!!");
+    }
+  }, [Pokemon.name]); // On utilise le nom du pokémon comme dépendance du useEffect
 
   return (
     <div>
@@ -58,8 +65,6 @@ const App = () =>{
       </div>
     </div>
   );
-}
+};
 
-export default App
-
-
+export default App;
