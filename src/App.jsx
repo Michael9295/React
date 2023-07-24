@@ -27,16 +27,11 @@ const pokemonList = [
     name: "mew",
   },
 ];
+
 const App = () => {
   const [pokemonIndex, setPokemonIndex] = useState(0);
 
-  const handleClickSuiv = () =>
-    setPokemonIndex((prevIndex) =>
-      prevIndex < pokemonList.length - 1 ? prevIndex + 1 : prevIndex
-    );
-
-  const handleClickPrec = () =>
-    setPokemonIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : prevIndex));
+  const handleClickPokemon = (index) => setPokemonIndex(index);
 
   const Pokemon = pokemonList[pokemonIndex];
 
@@ -53,14 +48,10 @@ const App = () => {
   return (
     <div>
       {Pokemon && <img src={Pokemon.imgSrc} alt={Pokemon.name} />}
-      <div>
-        <NavBar
-          handleClickPrec={handleClickPrec}
-          handleClickSuiv={handleClickSuiv}
-          pokemonIndex={pokemonIndex}
-          pokemonListLength={pokemonList.length}
-        />
-      </div>
+      <NavBar
+        pokemonList={pokemonList}
+        handleClickPokemon={handleClickPokemon}
+      />
     </div>
   );
 };
